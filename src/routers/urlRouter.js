@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { validateSchema } from "../middlewares/schemasValidator.js";
 import urlSchema from "../schemas/urlSchema.js";
-import { shortenUrl, getUrlById } from "../controllers/urlController.js";
+import {
+  shortenUrl,
+  getUrlById,
+  redirectUrl,
+} from "../controllers/urlController.js";
 import { tokenValidator } from "../middlewares/tokenValidator.js";
 
 const route = Router();
@@ -14,5 +18,6 @@ route.post(
 );
 
 route.get("/urls/:id", getUrlById);
+route.get("/urls/open/:shortUrl", redirectUrl);
 
 export default route;
