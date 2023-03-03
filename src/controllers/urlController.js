@@ -60,3 +60,13 @@ export async function redirectUrl(req, res) {
     res.status(500).send(error.message);
   }
 }
+
+export async function deleteUrl(req, res) {
+  try {
+    const { id } = req.params;
+    await db.query("DELETE FROM urls WHERE id = $1", [id]);
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
