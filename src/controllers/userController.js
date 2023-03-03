@@ -17,7 +17,7 @@ export async function userData(req, res) {
     }
 
     const urls = await db.query(
-      `SELECT urls.id, urls."shortUrl", urls.url, SUM(urls."visitCount") AS "visitCount"
+      `SELECT urls.id, urls."shortUrl", urls.url, urls."visitCount" 
     FROM urls
     JOIN sessions
     ON urls."userId" = sessions."userId"
@@ -26,10 +26,21 @@ export async function userData(req, res) {
       [token]
     );
 
+    const id = session.rows[0].id;
+
+    const visitCountSum = await db.query(
+      `
+        SELECT SUM("visitCount") AS "visitCount" 
+        FROM urls
+        WHERE "userId" = $1
+        `,
+      [id]
+    );
+
     res.status(200).send({
       id: session.rows[0].id,
       name: session.rows[0].name,
-      visitCount: urls.rows[0].visitCount,
+      visitCount: visitCountSum.rows[0].visitCount,
       shortenedUrls: urls.rows,
     });
   } catch (error) {
