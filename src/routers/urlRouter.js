@@ -21,6 +21,6 @@ route.post(
 route.get("/urls/:id", getUrlById);
 route.get("/urls/open/:shortUrl", redirectUrl);
 
-route.delete("/urls/:id", deleteUrl);
+route.delete("/urls/:id", tokenValidator, deleteUrl);
 
 export default route;
