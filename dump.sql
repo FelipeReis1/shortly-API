@@ -61,7 +61,8 @@ CREATE TABLE public.urls (
     "userId" integer NOT NULL,
     url text NOT NULL,
     "shortUrl" text NOT NULL,
-    "createdAt" timestamp without time zone DEFAULT now()
+    "createdAt" timestamp without time zone DEFAULT now(),
+    "visitCount" integer DEFAULT 0
 );
 
 
@@ -150,15 +151,18 @@ INSERT INTO public.sessions VALUES (5, 1, '30712faf-b724-44b5-85e5-e90f3e1a5912'
 INSERT INTO public.sessions VALUES (6, 1, 'd84d8953-a5fc-4c21-930b-f6eb3ddc2586', '2023-03-02 23:09:05.664415');
 INSERT INTO public.sessions VALUES (7, 1, '3c627176-c604-40da-b5f7-91f8a566ed2c', '2023-03-02 23:14:52.555759');
 INSERT INTO public.sessions VALUES (8, 1, 'e73917a6-0c22-47ad-9fa8-2a30dbf48a14', '2023-03-02 23:46:41.587306');
+INSERT INTO public.sessions VALUES (9, 2, '68a67d3d-a781-42f6-8f80-4831550cd2fd', '2023-03-03 00:17:51.703785');
 
 
 --
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (1, 1, 'https://testetestetestealoaloaloalo.com.br/qualquercoisa', 'QqDGr2NPo1AcDIUGF8m6t', '2023-03-02 23:47:40.305909');
-INSERT INTO public.urls VALUES (2, 1, 'https://testetestetestealoaloaloalo.com.br/q', 'A70rZbtycuQt55149K9dc', '2023-03-02 23:48:17.838501');
-INSERT INTO public.urls VALUES (3, 1, 'https://testetestetestealoal', 'lQAX-xniNeK2OaAOM3Jq5', '2023-03-02 23:48:53.623102');
+INSERT INTO public.urls VALUES (4, 1, 'https://testetestetestealoal.com.br', 'UhNrO5tpDVHUo9zyQIfdu', '2023-03-03 00:16:49.346068', 32);
+INSERT INTO public.urls VALUES (5, 2, 'https://testejoaotestejoao.com.br', 'VKXCs5vFKrGB9-R8GmiFU', '2023-03-03 00:18:17.614516', 11);
+INSERT INTO public.urls VALUES (1, 1, 'https://testetestetestealoaloaloalo.com.br/qualquercoisa', 'QqDGr2NPo1AcDIUGF8m6t', '2023-03-02 23:47:40.305909', 12);
+INSERT INTO public.urls VALUES (2, 1, 'https://testetestetestealoaloaloalo.com.br/q', 'A70rZbtycuQt55149K9dc', '2023-03-02 23:48:17.838501', 12);
+INSERT INTO public.urls VALUES (3, 1, 'https://testetestetestealoal', 'lQAX-xniNeK2OaAOM3Jq5', '2023-03-02 23:48:53.623102', 12);
 
 
 --
@@ -166,27 +170,28 @@ INSERT INTO public.urls VALUES (3, 1, 'https://testetestetestealoal', 'lQAX-xniN
 --
 
 INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$SEz92kh4TISgZlDDPo5/xenwT5OQ4UqcrBzlmBD/.sPOS9dXiFhZy', '2023-03-02 22:06:05.968621');
+INSERT INTO public.users VALUES (2, 'JoãoTeste', 'joaoteste@driven.com.br', '$2b$10$Yy0XnEMr.el9M//8lTCM5eu.7FUA59KhKXldisN7gegG0AmDbvPKe', '2023-03-03 00:17:44.795989');
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 8, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 9, true);
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 3, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 5, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 
 --
