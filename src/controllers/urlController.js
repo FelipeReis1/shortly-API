@@ -50,8 +50,7 @@ export async function redirectUrl(req, res) {
       visitCountAdder,
       url.rows[0].id,
     ]);
-
-    res.redirect(url.rows[0].url);
+    res.redirect(url.rows.url);
   } catch (error) {
     res.status(500).send(error.message);
   }
