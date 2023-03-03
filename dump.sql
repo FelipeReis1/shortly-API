@@ -53,6 +53,39 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
+-- Name: urls; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.urls (
+    id integer NOT NULL,
+    "userId" integer NOT NULL,
+    url text NOT NULL,
+    "shortUrl" text NOT NULL,
+    "createdAt" timestamp without time zone DEFAULT now()
+);
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.urls_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -93,6 +126,13 @@ ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.ses
 
 
 --
+-- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -103,6 +143,22 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.sessions VALUES (2, 1, '8408261d-325f-4aa1-868e-49086169d838', '2023-03-02 23:03:18.868642');
+INSERT INTO public.sessions VALUES (3, 1, '59242a0f-66f3-4553-bd69-665696489db1', '2023-03-02 23:04:28.252829');
+INSERT INTO public.sessions VALUES (4, 1, '77396a73-9e7e-418a-aeb9-f4d95a149b78', '2023-03-02 23:05:38.499131');
+INSERT INTO public.sessions VALUES (5, 1, '30712faf-b724-44b5-85e5-e90f3e1a5912', '2023-03-02 23:09:00.318971');
+INSERT INTO public.sessions VALUES (6, 1, 'd84d8953-a5fc-4c21-930b-f6eb3ddc2586', '2023-03-02 23:09:05.664415');
+INSERT INTO public.sessions VALUES (7, 1, '3c627176-c604-40da-b5f7-91f8a566ed2c', '2023-03-02 23:14:52.555759');
+INSERT INTO public.sessions VALUES (8, 1, 'e73917a6-0c22-47ad-9fa8-2a30dbf48a14', '2023-03-02 23:46:41.587306');
+
+
+--
+-- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.urls VALUES (1, 1, 'https://testetestetestealoaloaloalo.com.br/qualquercoisa', 'QqDGr2NPo1AcDIUGF8m6t', '2023-03-02 23:47:40.305909');
+INSERT INTO public.urls VALUES (2, 1, 'https://testetestetestealoaloaloalo.com.br/q', 'A70rZbtycuQt55149K9dc', '2023-03-02 23:48:17.838501');
+INSERT INTO public.urls VALUES (3, 1, 'https://testetestetestealoal', 'lQAX-xniNeK2OaAOM3Jq5', '2023-03-02 23:48:53.623102');
 
 
 --
@@ -116,7 +172,14 @@ INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$SEz92
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 1, false);
+SELECT pg_catalog.setval('public.sessions_id_seq', 8, true);
+
+
+--
+-- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.urls_id_seq', 3, true);
 
 
 --
@@ -143,6 +206,14 @@ ALTER TABLE ONLY public.sessions
 
 
 --
+-- Name: urls urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -164,6 +235,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.sessions
     ADD CONSTRAINT "sessions_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id);
+
+
+--
+-- Name: urls urls_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.urls
+    ADD CONSTRAINT "urls_userId_fkey" FOREIGN KEY ("userId") REFERENCES public.users(id);
 
 
 --
