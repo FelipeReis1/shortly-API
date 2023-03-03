@@ -15,3 +15,17 @@ export async function shortenUrl(req, res) {
   );
   res.status(201).send({ id: session.rows[0].id, shortUrl: shortenedUrl });
 }
+
+export async function getUrlById(req, res) {
+  const url = (await db.query(`SELECT * FROM urls`)).rows[0].url;
+  const shortUrl = (await db.query(`SELECT * FROM urls`)).rows[0].shortUrl;
+  const { id } = req.params;
+  if (!url) {
+    return res.sendStatus(404);
+  }
+  res.status(200).send({
+    id: id,
+    shortUrl,
+    url,
+  });
+}
