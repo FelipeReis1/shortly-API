@@ -41,7 +41,7 @@ export async function loginUser(req, res) {
       token,
       user.rows[0].id,
     ]);
-    res.status(200).send(token);
+    res.status(200).send({ token: token });
   } catch (error) {
     res.status(500).send(error.message);
   }
