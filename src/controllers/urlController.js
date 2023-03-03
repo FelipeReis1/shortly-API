@@ -38,8 +38,12 @@ export async function getUrlById(req, res) {
 }
 
 export async function redirectUrl(req, res) {
+  const { shortUrl } = req.params;
+
   try {
-    const url = await db.query(`SELECT * FROM urls `);
+    const url = await db.query(`SELECT * FROM urls WHERE "shortUrl" = $1`, [
+      shortUrl,
+    ]);
 
     if (url.rowCount === 0) {
       return res.sendStatus(404);
@@ -50,7 +54,8 @@ export async function redirectUrl(req, res) {
       visitCountAdder,
       url.rows[0].id,
     ]);
-    res.redirect(url.rows.url);
+
+    res.redirect(url.rows[0].url);
   } catch (error) {
     res.status(500).send(error.message);
   }
