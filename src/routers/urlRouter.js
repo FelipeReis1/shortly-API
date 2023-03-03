@@ -5,6 +5,7 @@ import {
   shortenUrl,
   getUrlById,
   redirectUrl,
+  deleteUrl,
 } from "../controllers/urlController.js";
 import { tokenValidator } from "../middlewares/tokenValidator.js";
 
@@ -19,5 +20,7 @@ route.post(
 
 route.get("/urls/:id", getUrlById);
 route.get("/urls/open/:shortUrl", redirectUrl);
+
+route.delete("/urls/:id", deleteUrl);
 
 export default route;
